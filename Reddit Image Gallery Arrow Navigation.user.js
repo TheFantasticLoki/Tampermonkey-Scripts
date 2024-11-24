@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Reddit Image Gallery Arrow Navigation
 // @namespace    https://reddit.com
-// @version      1.9.1
+// @version      1.9.2
 // @description  Navigate Reddit image galleries using arrow keys, made with the help of ChatGPT, Thanks ChatGPT!
 // @author       TheFantasticLoki
 // @match        https://*.reddit.com/*
@@ -17,6 +17,9 @@
 (function () {
     'use strict';
 
+    // Set the debug variable to control logging
+    const debug = false;
+
     let activeGallery = null;
 
     const simulateClick = (button) => {
@@ -28,12 +31,12 @@
                     view: window,
                 });
                 button.dispatchEvent(event);
-                console.log('Dispatched click event successfully');
+                if (debug) console.log('Dispatched click event successfully');
             } catch (err) {
-                console.error('Error dispatching click event:', err);
+                if (debug) console.error('Error dispatching click event:', err);
             }
         } else {
-            console.log('Button not interactable or not found.');
+            if (debug) console.log('Button not interactable or not found.');
         }
     };
 
@@ -43,21 +46,21 @@
         }
 
         if (!activeGallery) {
-            console.log('No active gallery to navigate.');
+            if (debug) console.log('No active gallery to navigate.');
             return;
         }
 
         if (e.key === 'ArrowLeft') {
-            console.log('Left arrow pressed');
+            if (debug) console.log('Left arrow pressed');
             const prevButton = activeGallery.querySelector('button[aria-label="Previous page"]');
-            console.log('Previous Button:', prevButton);
+            if (debug) console.log('Previous Button:', prevButton);
             simulateClick(prevButton);
         }
 
         if (e.key === 'ArrowRight') {
-            console.log('Right arrow pressed');
+            if (debug) console.log('Right arrow pressed');
             const nextButton = activeGallery.querySelector('button[aria-label="Next page"]');
-            console.log('Next Button:', nextButton);
+            if (debug) console.log('Next Button:', nextButton);
             simulateClick(nextButton);
         }
     };
@@ -66,13 +69,13 @@
         const galleryCarousel = e.currentTarget;
         if (galleryCarousel && galleryCarousel.shadowRoot) {
             activeGallery = galleryCarousel.shadowRoot;
-            console.log('Mouse entered gallery-carousel. Active gallery set:', activeGallery);
+            if (debug) console.log('Mouse entered gallery-carousel. Active gallery set:', activeGallery);
         }
     };
 
     const handleMouseLeave = () => {
         activeGallery = null;
-        console.log('Mouse left gallery-carousel. Active gallery cleared.');
+        if (debug) console.log('Mouse left gallery-carousel. Active gallery cleared.');
     };
 
     const detectPopup = () => {
@@ -81,7 +84,7 @@
             const gallery = lightbox.querySelector('gallery-carousel');
             if (gallery && gallery.shadowRoot) {
                 activeGallery = gallery.shadowRoot;
-                console.log('Gallery popup detected. Active gallery set:', activeGallery);
+                if (debug) console.log('Gallery popup detected. Active gallery set:', activeGallery);
             }
         }
     };
@@ -92,7 +95,7 @@
                 if (mutation.addedNodes) {
                     mutation.addedNodes.forEach((node) => {
                         if (node.id === 'shreddit-media-lightbox') {
-                            console.log('Lightbox detected:', node);
+                            if (debug) console.log('Lightbox detected:', node);
                             detectPopup();
                         }
                     });
@@ -126,5 +129,5 @@
     // Attach listeners for initial galleries
     attachHoverListeners();
 
-    console.log('Script initialized.');
+    if (debug) console.log('Script initialized.');
 })();
