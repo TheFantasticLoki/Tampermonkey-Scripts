@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name         Reddit Image Gallery Arrow Navigation
 // @namespace    https://reddit.com
-// @version      1.9
+// @version      1.9.1
 // @description  Navigate Reddit image galleries using arrow keys, made with the help of ChatGPT, Thanks ChatGPT!
 // @author       TheFantasticLoki
 // @match        https://*.reddit.com/*
 // @grant        none
 // @license      MIT
-// @homepage     https://github.com/
-// @homepageURL  https://github.com/
-// @supportURL   https://github.com/
-// @downloadURL  https://raw.githubusercontent.com/
-// @updateURL    https://raw.githubusercontent.com/
+// @homepage     https://github.com/TheFantasticLoki/Tampermonkey-Scripts
+// @homepageURL  https://github.com/TheFantasticLoki/Tampermonkey-Scripts
+// @supportURL   https://github.com/TheFantasticLoki/Tampermonkey-Scripts/issues
+// @downloadURL  https://github.com/TheFantasticLoki/Tampermonkey-Scripts/raw/refs/heads/master/Reddit%20Image%20Gallery%20Arrow%20Navigation.user.js
+// @updateURL    https://github.com/TheFantasticLoki/Tampermonkey-Scripts/raw/refs/heads/master/Reddit%20Image%20Gallery%20Arrow%20Navigation.user.js
 // ==/UserScript==
 
 (function () {
